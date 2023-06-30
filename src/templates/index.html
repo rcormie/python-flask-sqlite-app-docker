@@ -1,0 +1,18 @@
+<body>
+    <h1>Welcome to the Flask App</h1>
+    <p>This app uses Python, Flask, and SQLite. Gunicorn is used as the HTTP server to run the Flask application.</p>
+    <form method="POST" action="/">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Users:</h2>
+    <ul>
+        {% for user in users %}
+            <li>{{ user }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

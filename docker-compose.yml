@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  app:
+    image: python:3.9
+    container_name: python-flask-sqlite
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=/src/app.py
+      - DATABASE=/src/database.db
+    working_dir: /src
+    volumes:
+      - ./src:/src
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+      - 5000:5000
+    entrypoint: bash -c "apt-get update && apt-get install -y sqlite3 && pip install --upgrade pip==23.1.2 && pip install -r /src/requirements.txt && gunicorn --bind 0.0.0.0:5000 --workers 4 app:app"
+
